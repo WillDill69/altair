@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
+  "vconcat": [
+    {
+      "layer": [
+        {
+          "mark": {
+            "type": "area",
+            "color": {
+              "gradient": "linear",
+              "stops": [
+                {"color": "#4c78a8", "offset": 0},
+                {"color": "#c7e9ff", "offset": 1}
+              ],
+              "x1": 1,
+              "x2": 1,
+              "y1": 1,
+              "y2": 0
+            },
+            "line": {"color": "#4c78a8"}
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "Year",
+                "format": "d",
+                "title": "Year",
+                "type": "quantitative"
+              },
+              {
+                "field": "Visits_Millions",
+                "format": ".1f",
+                "title": "Visits (Millions)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "axis": {"format": "d", "tickCount": 11},
+              "field": "Year",
+              "scale": {"domain": [2014.5, 2024.5]},
+              "title": "Year",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "Visits_Millions",
+              "title": "Total Recreation Visits (Millions)",
+              "type": "quantitative"
+            }
+          },
+          "name": "view_1",
+          "title": "National Parks Visitation: The COVID Crash and Recovery"
+        },
+        {
+          "mark": {"type": "line", "color": "#4c78a8", "strokeWidth": 3},
+          "encoding": {
+            "x": {"field": "Year", "type": "quantitative"},
+            "y": {"field": "Visits_Millions", "type": "quantitative"}
+          }
+        },
+        {
+          "data": {"name": "data-4c8930a971f64074102e6449ba2ea38c"},
+          "mark": {
+            "type": "text",
+            "color": "red",
+            "fontSize": 11,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {"field": "text", "type": "nominal"},
+            "x": {"field": "x", "type": "quantitative"},
+            "y": {"field": "y", "type": "quantitative"}
+          }
+        }
+      ],
+      "data": {"name": "data-95ce8c3dee7766153207c7e8fcbf06e4"},
+      "height": 300,
+      "width": 700
+    },
+    {
+      "data": {"name": "data-089712389b669d48ee55cdb84653018f"},
+      "mark": {"type": "line", "point": true},
+      "encoding": {
+        "color": {"field": "Region", "title": "Region", "type": "nominal"},
+        "tooltip": [
+          {"field": "Year", "title": "Year", "type": "quantitative"},
+          {"field": "Region", "title": "Region", "type": "nominal"},
+          {
+            "field": "Visits_Millions",
+            "format": ".1f",
+            "title": "Visits (Millions)",
+            "type": "quantitative"
+          }
+        ],
+        "x": {"field": "Year", "title": "Year", "type": "quantitative"},
+        "y": {
+          "field": "Visits_Millions",
+          "title": "Visits (Millions)",
+          "type": "quantitative"
+        }
+      },
+      "height": 250,
+      "title": "Regional Breakdown",
+      "transform": [{"filter": {"param": "param_1"}}],
+      "width": 700
+    }
+  ],
+  "params": [
+    {
+      "name": "param_1",
+      "select": {"type": "interval", "encodings": ["x"]},
+      "views": ["view_1"]
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+  "datasets": {
+    "data-95ce8c3dee7766153207c7e8fcbf06e4": [
+      {
+        "Year": 2015,
+        "RecreationVisits": 80305331,
+        "Visits_Millions": 80.305331
+      },
+      {
+        "Year": 2016,
+        "RecreationVisits": 87619211,
+        "Visits_Millions": 87.619211
+      },
+      {
+        "Year": 2017,
+        "RecreationVisits": 89391395,
+        "Visits_Millions": 89.391395
+      },
+      {
+        "Year": 2018,
+        "RecreationVisits": 87714135,
+        "Visits_Millions": 87.714135
+      },
+      {
+        "Year": 2019,
+        "RecreationVisits": 91010784,
+        "Visits_Millions": 91.010784
+      },
+      {
+        "Year": 2020,
+        "RecreationVisits": 67931703,
+        "Visits_Millions": 67.931703
+      },
+      {
+        "Year": 2021,
+        "RecreationVisits": 92251857,
+        "Visits_Millions": 92.251857
+      },
+      {
+        "Year": 2022,
+        "RecreationVisits": 88662181,
+        "Visits_Millions": 88.662181
+      },
+      {
+        "Year": 2023,
+        "RecreationVisits": 92390204,
+        "Visits_Millions": 92.390204
+      },
+      {"Year": 2024, "RecreationVisits": 94287567, "Visits_Millions": 94.287567}
+    ],
+    "data-4c8930a971f64074102e6449ba2ea38c": [
+      {
+        "x": 2020,
+        "y": 61.286918549999996,
+        "text": "2020: Lockdown\nVisits Plummeted"
+      }
+    ],
+    "data-089712389b669d48ee55cdb84653018f": [
+      {
+        "Year": 2015,
+        "Region": "Alaska",
+        "RecreationVisits": 1555554,
+        "Visits_Millions": 1.555554
+      },
+      {
+        "Year": 2015,
+        "Region": "Intermountain",
+        "RecreationVisits": 31757055,
+        "Visits_Millions": 31.757055
+      },
+      {
+        "Year": 2015,
+        "Region": "Midwest",
+        "RecreationVisits": 9480207,
+        "Visits_Millions": 9.480207
+      },
+      {
+        "Year": 2015,
+        "Region": "Northeast",
+        "RecreationVisits": 5311810,
+        "Visits_Millions": 5.31181
+      },
+      {
+        "Year": 2015,
+        "Region": "Pacific West",
+        "RecreationVisits": 18738798,
+        "Visits_Millions": 18.738798
+      },
+      {
+        "Year": 2015,
+        "Region": "Southeast",
+        "RecreationVisits": 13461907,
+        "Visits_Millions": 13.461907
+      },
+      {
+        "Year": 2016,
+        "Region": "Alaska",
+        "RecreationVisits": 1617631,
+        "Visits_Millions": 1.617631
+      },
+      {
+        "Year": 2016,
+        "Region": "Intermountain",
+        "RecreationVisits": 35314655,
+        "Visits_Millions": 35.314655
+      },
+      {
+        "Year": 2016,
+        "Region": "Midwest",
+        "RecreationVisits": 9572166,
+        "Visits_Millions": 9.572166
+      },
+      {
+        "Year": 2016,
+        "Region": "Northeast",
+        "RecreationVisits": 5938665,
+        "Visits_Millions": 5.938665
+      },
+      {
+        "Year": 2016,
+        "Region": "Pacific West",
+        "RecreationVisits": 21202331,
+        "Visits_Millions": 21.202331
+      },
+      {
+        "Year": 2016,
+        "Region": "Southeast",
+        "RecreationVisits": 13973763,
+        "Visits_Millions": 13.973763
+      },
+      {
+        "Year": 2017,
+        "Region": "Alaska",
+        "RecreationVisits": 1649006,
+        "Visits_Millions": 1.649006
+      },
+      {
+        "Year": 2017,
+        "Region": "Intermountain",
+        "RecreationVisits": 36736859,
+        "Visits_Millions": 36.736859
+      },
+      {
+        "Year": 2017,
+        "Region": "Midwest",
+        "RecreationVisits": 9992852,
+        "Visits_Millions": 9.992852
+      },
+      {
+        "Year": 2017,
+        "Region": "Northeast",
+        "RecreationVisits": 6136803,
+        "Visits_Millions": 6.136803
+      },
+      {
+        "Year": 2017,
+        "Region": "Pacific West",
+        "RecreationVisits": 20965327,
+        "Visits_Millions": 20.965327
+      },
+      {
+        "Year": 2017,
+        "Region": "Southeast",
+        "RecreationVisits": 13910548,
+        "Visits_Millions": 13.910548
+      },
+      {
+        "Year": 2018,
+        "Region": "Alaska",
+        "RecreationVisits": 1670446,
+        "Visits_Millions": 1.670446
+      },
+      {
+        "Year": 2018,
+        "Region": "Intermountain",
+        "RecreationVisits": 36771564,
+        "Visits_Millions": 36.771564
+      },
+      {
+        "Year": 2018,
+        "Region": "Midwest",
+        "RecreationVisits": 10055381,
+        "Visits_Millions": 10.055381
+      },
+      {
+        "Year": 2018,
+        "Region": "Northeast",
+        "RecreationVisits": 6035082,
+        "Visits_Millions": 6.035082
+      },
+      {
+        "Year": 2018,
+        "Region": "Pacific West",
+        "RecreationVisits": 19845853,
+        "Visits_Millions": 19.845853
+      },
+      {
+        "Year": 2018,
+        "Region": "Southeast",
+        "RecreationVisits": 13335809,
+        "Visits_Millions": 13.335809
+      },
+      {
+        "Year": 2019,
+        "Region": "Alaska",
+        "RecreationVisits": 1831966,
+        "Visits_Millions": 1.831966
+      },
+      {
+        "Year": 2019,
+        "Region": "Intermountain",
+        "RecreationVisits": 36706116,
+        "Visits_Millions": 36.706116
+      },
+      {
+        "Year": 2019,
+        "Region": "Midwest",
+        "RecreationVisits": 10432134,
+        "Visits_Millions": 10.432134
+      },
+      {
+        "Year": 2019,
+        "Region": "Northeast",
+        "RecreationVisits": 6058514,
+        "Visits_Millions": 6.058514
+      },
+      {
+        "Year": 2019,
+        "Region": "Pacific West",
+        "RecreationVisits": 20683856,
+        "Visits_Millions": 20.683856
+      },
+      {
+        "Year": 2019,
+        "Region": "Southeast",
+        "RecreationVisits": 15298198,
+        "Visits_Millions": 15.298198
+      },
+      {
+        "Year": 2020,
+        "Region": "Alaska",
+        "RecreationVisits": 263651,
+        "Visits_Millions": 0.263651
+      },
+      {
+        "Year": 2020,
+        "Region": "Intermountain",
+        "RecreationVisits": 26147768,
+        "Visits_Millions": 26.147768
+      },
+      {
+        "Year": 2020,
+        "Region": "Midwest",
+        "RecreationVisits": 9069194,
+        "Visits_Millions": 9.069194
+      },
+      {
+        "Year": 2020,
+        "Region": "Northeast",
+        "RecreationVisits": 5389673,
+        "Visits_Millions": 5.389673
+      },
+      {
+        "Year": 2020,
+        "Region": "Pacific West",
+        "RecreationVisits": 13234827,
+        "Visits_Millions": 13.234827
+      },
+      {
+        "Year": 2020,
+        "Region": "Southeast",
+        "RecreationVisits": 13826590,
+        "Visits_Millions": 13.82659
+      },
+      {
+        "Year": 2021,
+        "Region": "Alaska",
+        "RecreationVisits": 843204,
+        "Visits_Millions": 0.843204
+      },
+      {
+        "Year": 2021,
+        "Region": "Intermountain",
+        "RecreationVisits": 37149244,
+        "Visits_Millions": 37.149244
+      },
+      {
+        "Year": 2021,
+        "Region": "Midwest",
+        "RecreationVisits": 12058648,
+        "Visits_Millions": 12.058648
+      },
+      {
+        "Year": 2021,
+        "Region": "Northeast",
+        "RecreationVisits": 7344130,
+        "Visits_Millions": 7.34413
+      },
+      {
+        "Year": 2021,
+        "Region": "Pacific West",
+        "RecreationVisits": 17908527,
+        "Visits_Millions": 17.908527
+      },
+      {
+        "Year": 2021,
+        "Region": "Southeast",
+        "RecreationVisits": 16948104,
+        "Visits_Millions": 16.948104
+      },
+      {
+        "Year": 2022,
+        "Region": "Alaska",
+        "RecreationVisits": 1506976,
+        "Visits_Millions": 1.506976
+      },
+      {
+        "Year": 2022,
+        "Region": "Intermountain",
+        "RecreationVisits": 33085963,
+        "Visits_Millions": 33.085963
+      },
+      {
+        "Year": 2022,
+        "Region": "Midwest",
+        "RecreationVisits": 12542193,
+        "Visits_Millions": 12.542193
+      },
+      {
+        "Year": 2022,
+        "Region": "Northeast",
+        "RecreationVisits": 7013083,
+        "Visits_Millions": 7.013083
+      },
+      {
+        "Year": 2022,
+        "Region": "Pacific West",
+        "RecreationVisits": 18577208,
+        "Visits_Millions": 18.577208
+      },
+      {
+        "Year": 2022,
+        "Region": "Southeast",
+        "RecreationVisits": 15936758,
+        "Visits_Millions": 15.936758
+      },
+      {
+        "Year": 2023,
+        "Region": "Alaska",
+        "RecreationVisits": 1747363,
+        "Visits_Millions": 1.747363
+      },
+      {
+        "Year": 2023,
+        "Region": "Intermountain",
+        "RecreationVisits": 35102946,
+        "Visits_Millions": 35.102946
+      },
+      {
+        "Year": 2023,
+        "Region": "Midwest",
+        "RecreationVisits": 13187265,
+        "Visits_Millions": 13.187265
+      },
+      {
+        "Year": 2023,
+        "Region": "Northeast",
+        "RecreationVisits": 7163121,
+        "Visits_Millions": 7.163121
+      },
+      {
+        "Year": 2023,
+        "Region": "Pacific West",
+        "RecreationVisits": 19177897,
+        "Visits_Millions": 19.177897
+      },
+      {
+        "Year": 2023,
+        "Region": "Southeast",
+        "RecreationVisits": 16011612,
+        "Visits_Millions": 16.011612
+      },
+      {
+        "Year": 2024,
+        "Region": "Alaska",
+        "RecreationVisits": 1787522,
+        "Visits_Millions": 1.787522
+      },
+      {
+        "Year": 2024,
+        "Region": "Intermountain",
+        "RecreationVisits": 36516532,
+        "Visits_Millions": 36.516532
+      },
+      {
+        "Year": 2024,
+        "Region": "Midwest",
+        "RecreationVisits": 13186958,
+        "Visits_Millions": 13.186958
+      },
+      {
+        "Year": 2024,
+        "Region": "Northeast",
+        "RecreationVisits": 7493809,
+        "Visits_Millions": 7.493809
+      },
+      {
+        "Year": 2024,
+        "Region": "Pacific West",
+        "RecreationVisits": 20359723,
+        "Visits_Millions": 20.359723
+      },
+      {
+        "Year": 2024,
+        "Region": "Southeast",
+        "RecreationVisits": 14943023,
+        "Visits_Millions": 14.943023
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
